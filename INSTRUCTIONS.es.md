@@ -79,7 +79,7 @@ Esto correrá automáticamente cada una de tus consultas y mostrará el resultad
 
 8. **¿Qué especies (`species_id`) tienen menos de 5 registros?**  
    _Agrupa por especie y usa HAVING para aplicar una condición._
-
+   
 9. **¿Qué observadores (`observer`) registraron más observaciones?**  
     _Agrupa por el nombre del observador y cuenta los registros._
 
