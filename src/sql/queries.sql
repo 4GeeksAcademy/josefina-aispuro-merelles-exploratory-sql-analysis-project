@@ -26,11 +26,14 @@ SELECT COUNT(*) FROM observations WHERE observation_date = "1998-08-08";
 
 -- MISSION 6
 -- Your query here;
-SELECT *, MAX(region_id) FROM observations;
+SELECT COUNT(region_id) AS total_observations, region_id FROM observations 
+GROUP BY region_id 
+ORDER BY COUNT(region_id) DESC 
+LIMIT 1;
 
 -- MISSION 7
 -- Your query here;
-SELECT * FROM observations GROUP BY species_id ORDER BY count DESC LIMIT 5;
+SELECT * FROM observations GROUP BY species_id ORDER BY COUNT(species_id) DESC;
 
 -- MISSION 8
 -- Your query here;
@@ -42,9 +45,18 @@ SELECT observer, COUNT(*) FROM observations GROUP BY observer ORDER BY COUNT(*) 
 
 -- MISSION 10
 -- Your query here;
-SELECT observations.*, regions.name AS region_name FROM observations JOIN regions ON observations.region_id = regions.id;
+SELECT regions.name FROM observations 
+JOIN regions ON observations.region_id = regions.id;
 
 -- MISSION 11
 -- Your query here;
-SELECT observations.*, species.scientific_name AS scientific_name FROM observations JOIN species ON observations.species_id = species.id;
+SELECT species.scientific_name FROM observations 
+JOIN species ON observations.species_id = species.id;
 
+-- MISSION 12
+SELECT regions.name AS region, species.scientific_name, COUNT(*) AS total 
+FROM observations
+INNER JOIN species ON observations.species_id = species.id
+INNER JOIN regions ON observations.region_id = regions.id
+GROUP BY region, species.scientific_name
+ORDER BY region, total DESC;
